@@ -25,19 +25,21 @@ Route::get('/draft', 'HomeController@getDraft');
 Route::group(['middleware' => ['auth']], function(){
 
     Route::prefix('dashboard')->group(function () {
+        Route::group(['middleware' => ['isAdmin']], function(){
+            Route::get('/requests', 'RequestController@index');
 
+            Route::resource('user', 'UserController')->only([
+                'index','create', 'store'
+            ]);
+            Route::resource('step', 'StepController')->only([
+                'index','create', 'store'
+            ]);
+            Route::resource('requestType', 'RequestTypeController')->only([
+                'index','create', 'store'
+            ]);
+
+        });
         Route::get('home','HomeDashBoardController@index');
-        Route::get('/requests', 'RequestController@index');
-
-        Route::resource('user', 'UserController')->only([
-            'index','create', 'store'
-        ]);
-        Route::resource('step', 'StepController')->only([
-            'index','create', 'store'
-        ]);
-        Route::resource('requestType', 'RequestTypeController')->only([
-            'index','create', 'store'
-        ]);
 
         Route::get('/myRequest', 'RequestController@myRequest')->middleware('ifStep');
         Route::get('/approveRequest/{requestId}/{status}', 'RequestController@approveRequest');

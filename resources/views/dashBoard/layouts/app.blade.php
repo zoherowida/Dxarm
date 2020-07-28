@@ -27,7 +27,7 @@
                 <li class="sidebar-header">
                     Pages
                 </li>
-
+                @if(\Illuminate\Support\Facades\Auth::user()->id == 1)
                 <li class="sidebar-item {{ (Request::is('dashboard/home') || Request::is('dashboard/home/*') ? 'active' : '') }}">
                     <a class="sidebar-link" href="{{ url('/dashboard/home') }}">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
@@ -53,6 +53,7 @@
                         <i class="align-middle" data-feather="git-pull-request"></i> <span class="align-middle">Requests</span>
                     </a>
                 </li>
+                @endif
                 @if(\App\Step::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->count() > 0)
                     <li class="sidebar-item {{ (Request::is('dashboard/myRequest') ? 'active' : '') }}">
                         <a class="sidebar-link" href="{{ url('/dashboard/myRequest') }}">
