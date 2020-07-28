@@ -26,7 +26,7 @@ class StepController extends Controller
 
         $request->validate([
             'name' => ['required'],
-            'stepNumber' => ['required'],
+            'stepNumber' => ['required', 'unique:steps'],
             'userId' => ['required', 'exists:users,id'],
         ]);
 

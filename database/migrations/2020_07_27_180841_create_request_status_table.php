@@ -18,6 +18,7 @@ class CreateRequestStatusTable extends Migration
             $table->integer('requestId');
             $table->longText('status');
             $table->integer('userId');
+            $table->integer('stepId');
             $table->softDeletes();
             $table->timestamps();
         });

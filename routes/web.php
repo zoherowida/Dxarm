@@ -25,6 +25,8 @@ Route::get('/draft', 'HomeController@getDraft');
 Route::group(['middleware' => ['auth']], function(){
 
     Route::prefix('dashboard')->group(function () {
+        Route::get('/','HomeDashBoardController@index');
+
         Route::group(['middleware' => ['isAdmin']], function(){
             Route::get('/requests', 'RequestController@index');
 
@@ -42,7 +44,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('home','HomeDashBoardController@index');
 
         Route::get('/myRequest', 'RequestController@myRequest')->middleware('ifStep');
-        Route::get('/approveRequest/{requestId}/{status}', 'RequestController@approveRequest');
+        Route::get('/approveRequest/{requestId}/{status}', 'RequestController@approveRequest')->middleware('ifStep');
 
     });
 
