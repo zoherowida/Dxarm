@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('requestType', 'RequestTypeController')->only([
             'index','create', 'store'
         ]);
+
+        Route::get('/myRequest', 'RequestController@myRequest')->middleware('ifStep');
+        Route::get('/approveRequest/{requestId}/{status}', 'RequestController@approveRequest');
+
     });
 
 

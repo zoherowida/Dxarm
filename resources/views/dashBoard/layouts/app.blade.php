@@ -53,6 +53,13 @@
                         <i class="align-middle" data-feather="git-pull-request"></i> <span class="align-middle">Requests</span>
                     </a>
                 </li>
+                @if(\App\Step::where('userId',\Illuminate\Support\Facades\Auth::user()->id)->count() > 0)
+                    <li class="sidebar-item {{ (Request::is('dashboard/myRequest') ? 'active' : '') }}">
+                        <a class="sidebar-link" href="{{ url('/dashboard/myRequest') }}">
+                            <i class="align-middle" data-feather="git-pull-request"></i> <span class="align-middle">Approve Request</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>
